@@ -1,0 +1,9 @@
+{
+  "version": "0.6",
+  "name": "Measure.ixi",
+  "main_class": "org.iota.ixi.Module",
+  "description": "This IXI module prints every transaction message to the console. Submits a 'Hello World!' message on start.",
+  "repository": "iotaledger/ixi",
+  "gui_port": -1,
+  "supported_versions": ["0.6"]
+}
