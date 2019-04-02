@@ -145,7 +145,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="81" />
+    <option name="x" value="27" />
+    <option name="y" value="84" />
     <option name="width" value="1440" />
     <option name="height" value="813" />
   </component>
@@ -241,7 +242,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554239027102" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554239066034" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="project.kotlinCompiler" />
