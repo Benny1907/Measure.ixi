@@ -5,10 +5,13 @@ import org.iota.ict.eee.EffectListenerQueue;
 import org.iota.ict.eee.Environment;
 import org.iota.ict.ixi.Ixi;
 import org.iota.ict.ixi.IxiModule;
+import org.iota.ict.ixi.context.IxiContext;
 import org.iota.ict.model.transaction.Transaction;
 import org.iota.ict.model.transaction.TransactionBuilder;
 import org.iota.ict.network.gossip.GossipEvent;
 import org.iota.ict.network.gossip.GossipListener;
+
+import view.MeasureIxiContext;
 
 /**
  * This is an example IXI module. Use it as template to implement your own module. Run Main.main() to test it.
@@ -17,6 +20,10 @@ import org.iota.ict.network.gossip.GossipListener;
  * https://github.com/iotaledger/ixi
  * */
 public class Module extends IxiModule {
+
+    private final MeasureIxiContext context = new MeasureIxiContext();
+
+
 
     public Module(Ixi ixi) {
         super(ixi);
@@ -28,7 +35,32 @@ public class Module extends IxiModule {
         TransactionBuilder builder = new TransactionBuilder();
         builder.asciiMessage("Hello World!");
         Transaction toSubmit = builder.build();
-        ixi.submit(toSubmit);
+        context.getConfiguration();
+
+        try {
+            while (true) {
+
+                ixi.submit(toSubmit);
+                System.out.println("Sende");
+
+                Thread.sleep(10000);
+            }
+        } catch (InterruptedException e) {
+            if (isRunning()) {
+                e.printStackTrace();
+
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @Override
+    public IxiContext getContext() {
+        return context;
+    }
+
+    public MeasureIxiContext getMeasureIxiContext() {
+        return context;
     }
 }
 
@@ -36,6 +68,7 @@ public class Module extends IxiModule {
  * A custom gossip listener which prints every message submitted or received.
  * */
 class CustomGossipListener implements GossipListener {
+
 
     @Override
     public void onReceive(GossipEvent effect) {

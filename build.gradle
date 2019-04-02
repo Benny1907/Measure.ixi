@@ -14,6 +14,9 @@ repositories {
 
 dependencies {
     compile 'com.github.iotaledger:ict:f8dec558aa13342e8629b36b6cb8157a142f5da0'
+    compile 'org.apache.httpcomponents:httpcore:4.4.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
 task ixi(type: Jar) {
