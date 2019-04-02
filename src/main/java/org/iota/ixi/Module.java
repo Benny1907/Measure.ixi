@@ -11,7 +11,10 @@ import org.iota.ict.model.transaction.TransactionBuilder;
 import org.iota.ict.network.gossip.GossipEvent;
 import org.iota.ict.network.gossip.GossipListener;
 
+import org.iota.ixi.configuration.Migrator;
 import view.MeasureIxiContext;
+
+import java.util.logging.Logger;
 
 /**
  * This is an example IXI module. Use it as template to implement your own module. Run Main.main() to test it.
@@ -22,7 +25,7 @@ import view.MeasureIxiContext;
 public class Module extends IxiModule {
 
     private final MeasureIxiContext context = new MeasureIxiContext();
-
+    private static final Logger log = Logger.getLogger("MeasureIxi");
 
 
     public Module(Ixi ixi) {
@@ -30,6 +33,23 @@ public class Module extends IxiModule {
         ixi.addListener(new EffectListenerQueue(new CustomGossipListener().getEnvironment()));
     }
 
+    @Override
+    public void install() {
+        // Attempt config migration from older Report.ixi versions if config is not found for the current version.
+        Migrator.migrateIfConfigurationMissing();
+    }
+
+    @Override
+    public void uninstall() {
+
+    }
+
+    @Override
+    public void onStart() {
+        log.info("Starting ReportIxi ...");
+
+
+    }
     public void run() {
         // submit a new transaction
         TransactionBuilder builder = new TransactionBuilder();
